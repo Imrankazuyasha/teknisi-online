@@ -1,58 +1,77 @@
-body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f9;
-}
+document.addEventListener("DOMContentLoaded", () => {
+    const contentSection = document.getElementById("content");
 
-header {
-    background: #0073e6;
-    color: #fff;
-    text-align: center;
-    padding: 1rem 0;
-}
+    const teknisiData = [
+        { name: "La Funge", status: "ready" },
+        { name: "La Amir", status: "not ready" },
+        { name: "La Imran", status: "ready" },
+        { name: "Wa Neni", status: "not ready" },
+        { name: "La Enos", status: "ready" },
+    ];
 
-main {
-    padding: 1rem;
-    max-width: 800px;
-    margin: 0 auto;
-    background: #fff;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
-}
+    const troubleData = [
+        { name: "Ganti Oli", price: "Rp50.000" },
+        { name: "Mesin Buntu", price: "Rp150.000" },
+        { name: "Perawatan Berkala - Paket Bulanan", price: "Rp300.000" },
+        { name: "Perawatan Berkala - Paket Lengkap", price: "Rp500.000" },
+        { name: "Overhaul", price: "Rp1.000.000" },
+    ];
 
-section {
-    margin-bottom: 2rem;
-}
+    const ratings = [];
 
-h2 {
-    color: #333;
-}
+    function renderTeknisi() {
+        let html = "<h2>Daftar Teknisi</h2><ul>";
+        teknisiData.forEach((teknisi) => {
+            html += `<li>${teknisi.name} - <span class="${teknisi.status}">${teknisi.status.replace("-", " ")}</span></li>`;
+        });
+        html += "</ul>";
+        contentSection.innerHTML = html;
+    }
 
-textarea {
-    width: 100%;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-}
+    function renderTrouble() {
+        let html = "<h2>Jenis Trouble dan Harga</h2><ul>";
+        troubleData.forEach((trouble) => {
+            html += `<li>${trouble.name} - ${trouble.price}</li>`;
+        });
+        html += "</ul>";
+        contentSection.innerHTML = html;
+    }
 
-button {
-    background: #0073e6;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 4px;
-}
+    function renderRating() {
+        let html = `
+            <h2>Rating Pelayanan</h2>
+            <div>
+                <label>Berikan Rating:</label>
+                <select id="rating-stars">
+                    <option value="1">⭐</option>
+                    <option value="2">⭐⭐</option>
+                    <option value="3">⭐⭐⭐</option>
+                    <option value="4">⭐⭐⭐⭐</option>
+                    <option value="5">⭐⭐⭐⭐⭐</option>
+                </select>
+                <br><br>
+                <label>Masukkan Kritik dan Saran:</label><br>
+                <textarea id="feedback" rows="5" placeholder="Tulis kritik dan saran Anda..."></textarea><br><br>
+                <button id="submit-rating">Kirim</button>
+            </div>
+            <div id="rating-display"></div>
+        `;
+        contentSection.innerHTML = html;
 
-button:hover {
-    background: #005bb5;
-}
+        document.getElementById("submit-rating").addEventListener("click", () => {
+            const rating = document.getElementById("rating-stars").value;
+            const feedback = document.getElementById("feedback").value;
 
-footer {
-    text-align: center;
-    padding: 1rem 0;
-    background: #333;
-    color: #fff;
-}
+            ratings.push({ rating, feedback });
+
+            const display = ratings.map(
+                (r, i) => `<p><strong>Rating #${i + 1}</strong>: ${r.rating} ⭐</p><p>Kritik/Saran: ${r.feedback}</p>`
+            ).join("");
+            document.getElementById("rating-display").innerHTML = display;
+        });
+    }
+
+    document.getElementById("menu-teknisi").addEventListener("click", renderTeknisi);
+    document.getElementById("menu-trouble").addEventListener("click", renderTrouble);
+    document.getElementById("menu-rating").addEventListener("click", renderRating);
+});
