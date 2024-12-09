@@ -1,77 +1,147 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const contentSection = document.getElementById("content");
+/* Global Styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f3f4f6;
+    color: #333;
+}
 
-    const teknisiData = [
-        { name: "La Funge", status: "ready" },
-        { name: "La Amir", status: "not ready" },
-        { name: "La Imran", status: "ready" },
-        { name: "Wa Neni", status: "not ready" },
-        { name: "La Enos", status: "ready" },
-    ];
+header {
+    background-color: #0056b3;
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    const troubleData = [
-        { name: "Ganti Oli", price: "Rp50.000" },
-        { name: "Mesin Buntu", price: "Rp150.000" },
-        { name: "Perawatan Berkala - Paket Bulanan", price: "Rp300.000" },
-        { name: "Perawatan Berkala - Paket Lengkap", price: "Rp500.000" },
-        { name: "Overhaul", price: "Rp1.000.000" },
-    ];
+header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    font-weight: bold;
+}
 
-    const ratings = [];
+header p {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0;
+}
 
-    function renderTeknisi() {
-        let html = "<h2>Daftar Teknisi</h2><ul>";
-        teknisiData.forEach((teknisi) => {
-            html += `<li>${teknisi.name} - <span class="${teknisi.status}">${teknisi.status.replace("-", " ")}</span></li>`;
-        });
-        html += "</ul>";
-        contentSection.innerHTML = html;
-    }
+nav {
+    background-color: #004080;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    function renderTrouble() {
-        let html = "<h2>Jenis Trouble dan Harga</h2><ul>";
-        troubleData.forEach((trouble) => {
-            html += `<li>${trouble.name} - ${trouble.price}</li>`;
-        });
-        html += "</ul>";
-        contentSection.innerHTML = html;
-    }
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0.5rem 0;
+    margin: 0;
+}
 
-    function renderRating() {
-        let html = `
-            <h2>Rating Pelayanan</h2>
-            <div>
-                <label>Berikan Rating:</label>
-                <select id="rating-stars">
-                    <option value="1">⭐</option>
-                    <option value="2">⭐⭐</option>
-                    <option value="3">⭐⭐⭐</option>
-                    <option value="4">⭐⭐⭐⭐</option>
-                    <option value="5">⭐⭐⭐⭐⭐</option>
-                </select>
-                <br><br>
-                <label>Masukkan Kritik dan Saran:</label><br>
-                <textarea id="feedback" rows="5" placeholder="Tulis kritik dan saran Anda..."></textarea><br><br>
-                <button id="submit-rating">Kirim</button>
-            </div>
-            <div id="rating-display"></div>
-        `;
-        contentSection.innerHTML = html;
+nav ul li {
+    margin: 0 1rem;
+}
 
-        document.getElementById("submit-rating").addEventListener("click", () => {
-            const rating = document.getElementById("rating-stars").value;
-            const feedback = document.getElementById("feedback").value;
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s, transform 0.2s;
+}
 
-            ratings.push({ rating, feedback });
+nav ul li a:hover {
+    background-color: #0073e6;
+    border-radius: 5px;
+    transform: scale(1.1);
+}
 
-            const display = ratings.map(
-                (r, i) => `<p><strong>Rating #${i + 1}</strong>: ${r.rating} ⭐</p><p>Kritik/Saran: ${r.feedback}</p>`
-            ).join("");
-            document.getElementById("rating-display").innerHTML = display;
-        });
-    }
+main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 2rem auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
 
-    document.getElementById("menu-teknisi").addEventListener("click", renderTeknisi);
-    document.getElementById("menu-trouble").addEventListener("click", renderTrouble);
-    document.getElementById("menu-rating").addEventListener("click", renderRating);
-});
+main h2 {
+    font-size: 1.8rem;
+    color: #0056b3;
+    margin-bottom: 1rem;
+}
+
+main ul {
+    list-style: none;
+    padding: 0;
+}
+
+main ul li {
+    margin: 0.5rem 0;
+    padding: 0.5rem 1rem;
+    background-color: #f9f9f9;
+    border-left: 5px solid #0056b3;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    transition: transform 0.2s;
+}
+
+main ul li:hover {
+    transform: scale(1.02);
+    background-color: #f0f4ff;
+}
+
+footer {
+    text-align: center;
+    background-color: #004080;
+    color: white;
+    padding: 1rem 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+
+.ready {
+    color: green;
+    font-weight: bold;
+}
+
+.not-ready {
+    color: red;
+    font-weight: bold;
+}
+
+button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #0073e6;
+    transform: scale(1.05);
+}
+
+textarea, select {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+textarea:focus, select:focus {
+    border-color: #0056b3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 86, 179, 0.3);
+}
