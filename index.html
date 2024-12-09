@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Teknisi Motor Online</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Pemesanan Teknisi Motor</h1>
+        <p>Kami siap membantu permasalahan kendaraan Anda!</p>
+    </header>
+
+    <main>
+        <section id="status-teknisi">
+            <h2>Jumlah Teknisi Tersedia</h2>
+            <p id="teknisi-ready">Loading...</p>
+        </section>
+
+        <section id="kontak">
+            <h2>Hubungi Kami</h2>
+            <p>Nomor WhatsApp: <a href="https://wa.me/6281234567890" target="_blank">+62 812-3456-7890</a></p>
+        </section>
+
+        <section id="kritik-saran">
+            <h2>Kritik dan Saran</h2>
+            <form id="saran-form">
+                <label for="kritik-saran">Masukkan kritik dan saran Anda:</label><br>
+                <textarea id="feedback" rows="5" required></textarea><br>
+                <button type="submit">Kirim</button>
+            </form>
+            <p id="response-message"></p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Pemesanan Teknisi Motor Online</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
